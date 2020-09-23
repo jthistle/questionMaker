@@ -2,7 +2,7 @@
 
 pyinstaller --onefile main.py
 
-rm -f prod
+rm -rf prod
 mkdir prod
 mkdir ./prod/final
 
