@@ -11,3 +11,4 @@ copy index_src.html prod\
 xcopy /Y /E /I sample_questions prod\questions
 
 copy USAGE.md prod\README.md
+copy LICENSE prod\
