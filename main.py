@@ -22,6 +22,7 @@ def main():
         with open(file_path, "r") as qfile:
             q_src = qfile.read()
 
+
             replace = []
             for match in image_re.finditer(q_src):
                 with open(os.path.join(QUESTIONS_DIR, match.group(2)), "rb") as imagefile:
@@ -36,13 +37,15 @@ def main():
             for x in replace:
                 sanitised = sanitised[:x[0][0]] + x[1] + sanitised[x[0][1]:]
 
-            sanitised = linebr_re.sub("<br />", sanitised)
+            sanitised = "<p>" + sanitised
+            sanitised = linebr_re.sub("</p><p>", sanitised)
+            sanitised += "</p>"
 
             inject_html += """
 <!-- from {path} -->
 <div class="question" id="question{n}">
   {txt}
-  <br /><span class="questionNum">Question no. {rn}</span>
+  <p class="questionNum">Question no. {rn}</span>
 </div>""".format(path=file_path, n=i, rn=i+1, txt=sanitised)
 
         i += 1
