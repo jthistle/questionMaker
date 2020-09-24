@@ -35,9 +35,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Make production
-        run: |
-          echo %GITHUB_WORKSPACE%
-          %GITHUB_WORKSPACE%\make_prod.bat
+        run: make_prod.bat
 
       - uses: actions/upload-artifact@v2
         with:
