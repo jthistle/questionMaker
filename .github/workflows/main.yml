@@ -35,6 +35,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Make production
+        shell: cmd
         run: call .\make_prod.bat
 
       - uses: actions/upload-artifact@v2
