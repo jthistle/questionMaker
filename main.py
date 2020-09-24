@@ -8,12 +8,18 @@ def main():
     SRC_HTML = "./index_src.html"
     DEST_HTML = "./final/index.html"
     QUESTIONS_DIR = "./questions"
-    questions = os.listdir(QUESTIONS_DIR)
+    bold_re = re.compile(r"(?:\*\*(.*?)\*\*)|(?:__(.*?)__)", re.I);
+    italic_re = re.compile(r"(?:\*(.*?)\*)|(?:_(.*?)_)", re.I);
     image_re = re.compile(r"!\[([^\]\n]*)\]\(([^\)\n]+)\)", re.I);
     linebr_re = re.compile("\n\n+", re.M)
+    ul_re = re.compile(r"\n((?:[-*]\s.*?\n)+)", re.I);
+    ul_li_re = re.compile(r"\n\s*[-*]\s(.*)", re.I);
+    ol_re = re.compile(r"\n((?:\d\.\s.*?\n)+)", re.I);
+    ol_li_re = re.compile(r"\n\s*\d\.\s(.*)", re.I);
 
     inject_html = ""
     i = 0
+    questions = os.listdir(QUESTIONS_DIR)
     for q in questions:
         if q[-3:] != ".md":
             continue
@@ -21,7 +27,6 @@ def main():
         file_path = os.path.join(QUESTIONS_DIR, q)
         with open(file_path, "r") as qfile:
             q_src = qfile.read()
-
 
             replace = []
             for match in image_re.finditer(q_src):
@@ -32,14 +37,23 @@ def main():
                 )
                 replace.append((match.span(), replacement))
 
-            sanitised = q_src
+            sanitised = "\n" + q_src
             replace.reverse()
             for x in replace:
                 sanitised = sanitised[:x[0][0]] + x[1] + sanitised[x[0][1]:]
 
+            sanitised = ul_re.sub(r"<ul>\n\1</ul>", sanitised)
+            sanitised = ul_li_re.sub(r"<li>\1</li>", sanitised)
+
+            sanitised = ol_re.sub(r"<ol>\n\1</ol>", sanitised)
+            sanitised = ol_li_re.sub(r"<li>\1</li>", sanitised)
+
             sanitised = "<p>" + sanitised
             sanitised = linebr_re.sub("</p><p>", sanitised)
             sanitised += "</p>"
+
+            sanitised = bold_re.sub(r"<b>\1\2</b>", sanitised)
+            sanitised = italic_re.sub(r"<i>\1\2</i>", sanitised)
 
             inject_html += """
 <!-- from {path} -->
