@@ -40,10 +40,10 @@ def main():
 
             inject_html += """
 <!-- from {path} -->
-<p class="question" id="question{n}">
+<div class="question" id="question{n}">
   {txt}
   <br /><span class="questionNum">Question no. {rn}</span>
-</p>""".format(path=file_path, n=i, rn=i+1, txt=sanitised)
+</div>""".format(path=file_path, n=i, rn=i+1, txt=sanitised)
 
         i += 1
 

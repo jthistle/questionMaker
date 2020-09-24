@@ -29,5 +29,12 @@ to tell it that, no, you're not trying to install malware.
 
 ### Testing
 
-Every time you make a change, you'll have to run `python3 main.py` and then reload the webpage at `./final/index.html` in your browser.
+If you're on Linux, run `start_dev.sh` to start up a watch script that will automatically recreate the test webpage when changes are made
+to `index_src.html` or `main.py`. You will still manually need to refresh your browser window. Requires `inotifywait`:
+
+```sh
+sudo apt install inotify-tools
+```
+
+Otherwise, every time you make a change, you'll have to run `python3 main.py` and then reload the webpage at `./final/index.html` in your browser.
 
