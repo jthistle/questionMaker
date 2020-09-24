@@ -30,10 +30,17 @@ def main():
 
             replace = []
             for match in image_re.finditer(q_src):
-                with open(os.path.join(QUESTIONS_DIR, match.group(2)), "rb") as imagefile:
+                img = match.group(2)
+                with open(os.path.join(QUESTIONS_DIR, img), "rb") as imagefile:
                     b64 = base64.b64encode(imagefile.read())
-                replacement = '<img alt="{}" src="data:image/png;base64, {}" />'.format(
-                    match.group(1), b64.decode("ascii")
+
+                parts = img.split(".")
+                if len(parts) == 1:
+                    ext = "png"
+                else:
+                    ext = parts[-1]
+                replacement = '<img alt="{}" src="data:image/{};base64, {}" />'.format(
+                    match.group(1), ext, b64.decode("ascii")
                 )
                 replace.append((match.span(), replacement))
 

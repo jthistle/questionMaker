@@ -1,8 +1,8 @@
 # How to use QuestionMaker
 
-1. Write your questions as separate markdown files in the `./questions` folder. You can also include images in this folder.
+1. Write your questions as separate markdown files in the `./questions` folder. You can also include images in this folder. See the questions folder for a couple of example questions.
 
-2. Run `questionMaker`.
+2. Run `questionMaker.exe` (or just `questionMaker` on Linux).
 
 3. Your question generating webpage will be located in './final/index.html'.
 
