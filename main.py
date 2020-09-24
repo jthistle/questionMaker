@@ -40,7 +40,7 @@ def main():
             sanitised = "\n" + q_src
             replace.reverse()
             for x in replace:
-                sanitised = sanitised[:x[0][0]] + x[1] + sanitised[x[0][1]:]
+                sanitised = sanitised[:x[0][0]] + x[1] + sanitised[x[0][1]+1:]
 
             sanitised = ul_re.sub(r"<ul>\n\1</ul>", sanitised)
             sanitised = ul_li_re.sub(r"<li>\1</li>", sanitised)
