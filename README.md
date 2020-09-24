@@ -4,15 +4,20 @@ A tool for making portable webpages to randomly choose practice questions.
 
 ## Building for distribution
 
+Requires `pyinstaller` and python3:
+
+```
+pip install pyinstaller
+```
+
 ### Linux
 
-To make this into a form distributable to end users, run `make_prod.sh` and share the contents of the `prod` directory.
-
-Requires `pyinstaller`.
+To make this into a form distributable to end users on Linux, run `make_prod.sh` and share the contents of the `prod` directory.
 
 ### Windows
 
-Once I work out how tf batch files work I'll do something for this.
+Run `make_prod.bat` and share the contents of the `prod` directory. You may have to go into Windows Defender a couple of times
+to tell it that, no, you're not trying to install malware.
 
 ## Dev
 
